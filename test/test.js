@@ -43,7 +43,7 @@ describe('gulp-js-templates', function () {
 		/**
 		 * Empty destination file
 		 */
-		it('should throw, missing destination file', function (done) {
+		it('should throw on missing destination file', function (done) {
 			(function () {
 				jtpl();
 			}).should.throw('Missing destination file path');
@@ -107,6 +107,17 @@ describe('gulp-js-templates', function () {
 			});
 
 			stream.end();
+		});
+
+		/**
+		 * Should throw on invalid variable name
+		 */
+		it('should throw on invalid variable name', function (done) {
+
+			(function () {
+				jtpl('dist/test.js', { varName: {} });
+			}).should.throw('Please choose a valid variable name');
+			done();
 		});
 
 		/**

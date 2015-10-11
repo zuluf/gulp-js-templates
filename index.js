@@ -38,7 +38,7 @@
 		 * Defaults to the destFile name without the extension
 		 */
 		options = {
-			varName: ((options && options.varName) || path.basename(destFile).split('.').shift().replace(/-/g, ''))
+			varName: sanitizeVarName((options && options.varName) || path.basename(destFile).split('.').shift())
 		};
 
 		/**
@@ -61,6 +61,21 @@
 			fileName = fileName.split('.').shift();
 
 			return "'" + (fileName[0] === "\\" ? fileName.substr(1) : fileName).replace(/\\/g, '.') + "'";
+		}
+
+		/**
+		 * Sanitizes global variable name
+		 *
+		 * @param  (String) string variable name
+		 * @throws (PluginError) wrong type error
+		 * @return (String)
+		 */
+		function sanitizeVarName (string) {
+			if (typeof string !== "string") {
+				throw new gutil.PluginError('gulp-js-templates', 'Please choose a valid variable name');
+			}
+
+			return string.replace(/^[^a-zA-Z_]+|[^a-zA-Z_0-9]+/g, '');
 		}
 
 		/**
