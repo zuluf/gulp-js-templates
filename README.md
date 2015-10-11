@@ -17,7 +17,7 @@ var jtpl = require('gulp-js-templates');
 
 gulp.task('templates', function () {
   return gulp.src('./templates/**/*.mustache')
-    .pipe(jtpl('templates.js', { varName: 'myTemplates' }))
+    .pipe(jtpl('templates.min.js', { varName: 'myTemplates' }))
     .pipe(gulp.dest('./public/dist'));
 });
 ```
@@ -43,6 +43,7 @@ the plugin provides a simple logic you can use to import your templates with a s
 Use the plugin to concatenate your mustache|hbs|whatever templates into usable js object.
 Template content will be packed into global variable as { filePath : templateString }
 Property name will be derived from path to template.
+
 ex file structure:
 ```
 	layout/
@@ -52,11 +53,19 @@ ex file structure:
 ```
 will map to:
 ```
-	var templates = {
+	var myTemplates = {
 		'layout.header.header': header html,
 		'layout.header.menu': menu html
 	}
 ```
+In your app just add `<script type="text/javascript" src="path/to/public/dist/templates.min.js"></script>` and render your template like:
+```
+var menu = {
+    // your menu instance properties
+}
+var output = Mustache.render(myTemplates['layout.header.menu'], menu);
+```
+Enjoy the ride!
 
 ## License
 
