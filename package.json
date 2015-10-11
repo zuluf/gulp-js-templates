@@ -1,6 +1,6 @@
 {
   "name": "gulp-js-templates",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Compile template files to js object reference",
   "main": "index.js",
   "scripts": {
@@ -11,9 +11,12 @@
     "url": "git://github.com/zuluf/gulp-js-templates.git"
   },
   "keywords": [
-    "gulpplugin",
+    "gulp plugin",
     "gulp",
     "js",
+    "browser",
+    "import",
+    "template",
     "templates"
   ],
   "author": {
