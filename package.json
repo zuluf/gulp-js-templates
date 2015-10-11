@@ -1,0 +1,39 @@
+{
+  "name": "gulp-js-templates",
+  "version": "1.0.0",
+  "description": "Compile template files to js object reference",
+  "main": "index.js",
+  "scripts": {
+    "test": "jshint index.js && mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zuluf/gulp-js-templates.git"
+  },
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "js",
+    "templates"
+  ],
+  "author": {
+    "name": "Marko Lazarevic"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zuluf/gulp-js-templates/issues"
+  },
+  "homepage": "https://github.com/zuluf/gulp-js-templates#readme",
+  "dependencies": {
+    "gulp": "^3.8.7",
+    "gulp-util": "^3.0.1",
+    "through2": "^0.6.3",
+    "readable-stream": "^2.0.2"
+  },
+  "devDependencies": {
+    "jshint": "^2.4.1",
+    "mocha": "^2.1.0",
+    "should": "^4.6.5",
+    "sandbox": "0.8.6"
+  }
+}
