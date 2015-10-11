@@ -51,6 +51,35 @@ describe('gulp-js-templates', function () {
 		});
 
 		/**
+		 * Should throw on invalid variable name
+		 */
+		it('should throw on invalid variable name', function (done) {
+
+			(function () {
+				jtpl('dist/test.js', { varName: {} });
+			}).should.throw('Please choose a valid variable name');
+			done();
+		});
+
+		/**
+		 * Should remove base directory from the templates property map
+		 */
+		it('should remove base directory from the template property', function (done) {
+			var file, stream;
+
+			file = createVinyl('small/file.mustache');
+			stream = jtpl('dist/test.js', { base : 'small' });
+
+			stream.once('data', function (response) {
+				String(response.contents).should.equal("var test = {'file' : '<span></span>'};");
+				done();
+			});
+
+			stream.write(file);
+			stream.end();
+		});
+
+		/**
 		 * Compile single file
 		 */
 		it('should parse template file', function (done) {
@@ -107,17 +136,6 @@ describe('gulp-js-templates', function () {
 			});
 
 			stream.end();
-		});
-
-		/**
-		 * Should throw on invalid variable name
-		 */
-		it('should throw on invalid variable name', function (done) {
-
-			(function () {
-				jtpl('dist/test.js', { varName: {} });
-			}).should.throw('Please choose a valid variable name');
-			done();
 		});
 
 		/**

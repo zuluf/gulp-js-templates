@@ -24,7 +24,9 @@
 	path = require('path');
 
 	module.exports = function (destFile, options) {
-		var buffers;
+		var buffers, separator;
+
+		separator = new RegExp("[\\\/]", 'g');
 
 		/**
 		 * Check if moron sent the path to dist file
@@ -38,7 +40,8 @@
 		 * Defaults to the destFile name without the extension
 		 */
 		options = {
-			varName: sanitizeVarName((options && options.varName) || path.basename(destFile).split('.').shift())
+			varName: sanitizeVarName((options && options.varName) || path.basename(destFile).split('.').shift()),
+			base: (options && options.base) || false
 		};
 
 		/**
@@ -57,10 +60,22 @@
 		function formatName (file) {
 			var fileName;
 
-			fileName = file.path.replace(file.base, '');
-			fileName = fileName.split('.').shift();
+			fileName = file.path.replace(file.base, '')
+				.replace(path.extname(file.path), '')
+				.replace(/[\\\/]/g, '/');
 
-			return "'" + (fileName[0] === "\\" ? fileName.substr(1) : fileName).replace(/\\/g, '.') + "'";
+			if (options.base) {
+				fileName = fileName.replace(options.base.replace(/[\\\/]/g, '/') + '/', '');
+			}
+
+			// fucking missing directory base, sometimes
+			if (fileName[0] === '/') {
+				fileName = fileName.substring(1);
+			}
+
+			fileName = fileName.replace(separator, '.');
+
+			return ("'" + fileName + "'");
 		}
 
 		/**
@@ -165,13 +180,11 @@
 			}
 
 			if (templateFile) {
-
-
 				templateContent = 'var ' + options.varName + ' = {' + buffers.join(', ') + '};';
 				templateFile.contents = new Buffer(templateContent);
-			}
 
-			this.push(templateFile);
+				this.push(templateFile);
+			}
 
 			done();
 			return;
