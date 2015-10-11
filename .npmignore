@@ -18,4 +18,4 @@ node_modules
 *.sublime*
 .travis.yml
 test
-examples/public
+example/public
