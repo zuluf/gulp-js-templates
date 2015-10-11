@@ -23,8 +23,9 @@ gulp.task('templates', function () {
 ```
 ## Options
 
-The only option (for now) is to define the global scope variable name to put your templates to
+Plugin supports these options:
 - `varName`: String for the global scope variable to hold your templates
+- `base`: String to remove from the beggining of every file path
 
 ## File streams
 
