@@ -1,6 +1,6 @@
 {
   "name": "gulp-js-templates",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "description": "Compile template files to js object reference",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,7 @@
   "author": {
     "name": "Marko Lazarevic"
   },
-  "license": "MIT",
+  "license": "Beerware",
   "bugs": {
     "url": "https://github.com/zuluf/gulp-js-templates/issues"
   },
